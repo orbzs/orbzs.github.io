@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSlightbox+ShowWhenHover</title>
+    <link rel="stylesheet" href="GSlightbox.css" />
+  </head>
+  <body>
+    <!--  CSS Lightbox Tutorial
+      https://codesalad.dev/blog/pure-css-lightbox-25
+     -->
+    <!-- 001: thumbnail image wrapped in a link -->
+    <h2>GSlightbox: show when click</h2>
+    <a href="#img1"> trying: img to text </a>
+    <a href="#img2">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRH9lsFrIdBHNG5E80MlLiqZW6rTUNMKY42w&s"
+      />
+    </a>
+
+    <!-- 002: lightbox container hidden with CSS -->
+    <a href="#" class="lightbox" id="img1">
+      <span
+        style="background-image: url('https://picsum.photos/seed/9/900/450')"
+      ></span>
+    </a>
+
+    <a href="#" class="lightbox" id="img2">
+      <span
+        style="
+          background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRH9lsFrIdBHNG5E80MlLiqZW6rTUNMKY42w&s');
+        "
+      ></span>
+    </a>
+    <hr />
+    <!-- HOVER_IMG -->
+    <h2>GS+CargoHover: show when click</h2>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat,
+      corrupti. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
+      magnam impedit deserunt nisi tempora deleniti eaque perferendis non odio
+      maxime!
+      <span class="hover_img_container">
+        <a href="#"><span class="hoverimg01"></span>testing link 01</a> </span
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, blanditiis!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi odit quia
+      labore ratione doloremque deserunt aliquid eius fugit repudiandae
+      consequuntur!<span class="hover_img_container">
+        <a href="#"><span class="hoverimg02"></span>testing link 02</a>
+      </span>
+    </p>
+  </body>
+</html>
+
+<!-- 參考：https://codepen.io/gschier/pen/kyRXVx -->
