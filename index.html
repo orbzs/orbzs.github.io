@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="第七屆WeHelp Academy申請資料" />
+    <meta name="author" content="orbzs" />
+    <meta content="WeHelp申請 | 林庭安 | " property="og:title" />
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./locomotive-scroll.min.css" />
+    <style>
+      .grid-item {
+        white-space: normal !important;
+        overflow-wrap: anywhere !important;
+        word-wrap: break-word !important;
+      }
+
+      .hover-title {
+        display: inline;
+        pointer-events: auto;
+        cursor: pointer;
+      }
+
+      .hover-image {
+        visibility: hidden;
+      }
+
+      body:not(.mobile) .hover-title:hover + .hover-image {
+        visibility: visible;
+        pointer-events: none;
+      }
+
+      .hover-image {
+        display: flex;
+        position: fixed;
+        opacity: 85%;
+        top: 80%;
+        left: 80%;
+        transform: translate(-80%, -80%);
+        z-index: 1;
+        pointer-events: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* Change width and height to scale images */
+        width: 30vw;
+        height: 30vh;
+      }
+
+      .hover-image img {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        width: auto !important;
+        height: auto !important;
+        margin-bottom: 0;
+      }
+    </style>
+    <script defer="" src="./movingTitle.js"></script>
+    <title>WeHelp申請 | 林庭安</title>
+  </head>
+  <body>
+    <header class="flex-container emfont-LINESeedJP-400">
+      <h1 class="emfont-GlowSansTCEx-500">第七屆WeHelp Academy申請</h1>
+      <address class="emfont-GlowSansTCEx-400">
+        林庭安<br /><a href="mailto:orbzs085@gmail.com">orbzs085@gmail.com</a>
+      </address>
+    </header>
+    <main data-scroll-container>
+      <div class="grid-container emfont-GlowSansJP-400">
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">Q1. 個人簡介和申請動機。</h2>
+          <p data-scroll class="a">
+            各位好，我是林庭安，畢業於台灣大學獸醫系。原先預定往小動物臨床獸醫師前進，但是在求學的過程中，隨著本科的知識累積，反而開始對未來的規劃感到挫折、迷茫。畢業之後，我選擇成為研究助理，嘗試探索臨床以外的領域。工作一陣之後，發現自己對獸醫領域的興趣並不大，因此開始思考其他的可能性。
+            在尋找資料後，我認為網頁工程是一個可以持續學習、有發展性的領域，並且網路上的轉職經驗分享讓我有了想要挑戰的念頭。
+            決定轉職後，我找了一些線上課程自習，但發現跟著影片練習的進度緩慢，並且在搜尋、篩選參考資料上花了大量時間，也無法確定自己是否具備足夠的能力可以進一步鑽研更深的知識。為了解決這些問題，我開始搜尋是否有合適的訓練課程，也因此知道了WeHelp。
+          </p>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q2. 曾經做過哪些軟體工程技術相關的學習？若有作品請分享給我們。
+          </h2>
+          <p data-scroll class="a">
+            今年七月利用udemy學習基礎HTML、CSS，過程小於一個月。在這之前製作過：
+          </p>
+          <ul>
+            <li>
+              <a href="https://p-a-p-e-r-t-a-p-e.neocities.org/" target="_blank"
+                ><div class="hover-title">噗浪自訂布景(2023/12)</div>
+                <div class="hover-image">
+                  <img src="./screenshot-plurk-old.png" /></div
+              ></a>
+            </li>
+            <li>
+              <a href="https://p-a-p-e-r-t-a-p-e.neocities.org/" target="_blank"
+                ><div class="hover-title">個人網站(2025/01)</div>
+                <div class="hover-image">
+                  <img src="./screenshot-webpage.png" /></div
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q3. 如果參與這個訓練，會怎麼安排學習時間？
+          </h2>
+          <p data-scroll class="a">
+            由於今年11月~年底才離職，因此時間安排會分為兩部分：
+          </p>
+          <ul>
+            <li>
+              離職前：<br />平日休息時間+回家後共5~5.5小時，週末10小時，每週至少42小時。
+            </li>
+            <li>
+              離職後：<br />每日9~12小時，每週排定一天彈性休息，每週至少54小時。
+            </li>
+          </ul>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q4. 軟體技術日新月異，如何確定投入的領域是正確有回報的？
+          </h2>
+          <p data-scroll class="a">
+            我認為想要確認投入的領域是否正確，可由下列幾點檢視現況：
+          </p>
+          <ul>
+            <li>關注技術社群動態、企業徵才資訊，了解當前趨勢</li>
+            <li>
+              透過實作累積經驗，並與相關領域人士討論、尋求回饋，隨時修正方向
+            </li>
+          </ul>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q5. 請描述一件產生明顯負面情緒的經歷，如何處理該情緒？
+          </h2>
+          <p data-scroll class="a">
+            在大學的時候曾經因為課程被當掉而延畢一年，收到成績的當下非常沮喪，也開始懷疑自己是否能力不足。為了不要持續消沉，我給自己一週的時間休息，保持充足的睡眠及營養，並且遠離社群媒體。整理完情緒之後，開始分析不及格的原因，重新安排讀書計畫，最後也順利在下一屆畢業。
+          </p>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q6. 關於這份申請網頁，分享一個開發時的技術心得。
+          </h2>
+          <p data-scroll class="a"></p>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">
+            Q7. 如何看待人工智慧的發展對軟體工程師的影響？
+          </h2>
+          <p data-scroll class="a">
+            我認為人工智慧的發展對於軟體工程師的學習有正面效果，但是要在有背景知識的情況下使用，才能發揮最大的效力。例如先前想要生成excel公式時，雖然一直得到沒有功能的寫法，但是因為不熟悉而查不到相關資訊，最後只好手動輸入、編排資料。在人工智慧的使用上，我認為應該要時常關注，瞭解目前版本的功能，並且隨時記得查證，確保資訊的正確性。
+          </p>
+        </div>
+        <div class="grid-item" data-scroll-section>
+          <h2 data-scroll class="q">Q8. 其他想要對我們說的事情？</h2>
+          <p data-scroll class="a">
+            在知道WeHelp之後其實猶豫了好一段時間，但是在看完九月的專案報告分享後，我覺得受到很大的鼓勵，也因此下定決心報名。（真的非常感謝各位的分享！！）
+          </p>
+        </div>
+      </div>
+    </main>
+    <script src="./locomotive-scroll.min.js"></script>
+    <script src="./locomotive.js"></script>
+    <script src="https://font.emtech.cc/emfont.js"></script>
+    <script>
+      emfont.init();
+    </script>
+  </body>
+</html>

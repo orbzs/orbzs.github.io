@@ -1,0 +1,127 @@
+@charset "UTF-8";
+:root {
+  --main-color: #b4e432;
+  --bg-color: #fefefe;
+  --text-color: #111111;
+  --link-color: #272727;
+  --link-color-hover: #000000;
+  --link-color-visited: #696969;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: auto;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+::-moz-selection {
+  background: var(--bg-color);
+  color: var(--link-color-visited);
+}
+
+::selection {
+  background: var(--bg-color);
+  color: var(--link-color-visited);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: 1s ease-in-out;
+}
+a:visited {
+  color: var(--link-color-visited);
+}
+a:hover {
+  -webkit-text-decoration: underline wavy var(--link-color-hover);
+          text-decoration: underline wavy var(--link-color-hover);
+}
+
+p {
+  line-height: 1.6rem;
+}
+
+li {
+  list-style-type: "→";
+}
+
+header {
+  background: linear-gradient(var(--main-color), var(--bg-color));
+  color: var(--title-color);
+  display: flex;
+  flex-flow: column wrap;
+  height: 20vh;
+  width: 100vw;
+}
+header h1 {
+  flex-basis: 60%;
+  display: flex;
+  align-items: end;
+  padding-left: 80px;
+}
+header address {
+  flex-basis: 40%;
+  padding-left: 80px;
+  font-style: normal;
+}
+header address a:hover {
+  text-decoration: none;
+}
+
+main div.grid-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(7, 380px);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 30px;
+  height: calc(80vh - 60px);
+  width: 2920px;
+  margin: 30px 40px;
+}
+main div.grid-container .grid-item {
+  background-color: var(--main-color);
+  color: var(--text-color);
+  padding: 50px;
+  min-width: 0;
+  border-radius: 80px;
+}
+main div.grid-container div:nth-of-type(1) {
+  grid-column: 1/3;
+  grid-row: 1/5;
+}
+main div.grid-container div:nth-of-type(2) {
+  grid-column: 1/3;
+  grid-row: 5/7;
+  padding: 40px 50px;
+}
+main div.grid-container div:nth-of-type(3) {
+  grid-column: 3/5;
+  grid-row: 1/3;
+  padding: 30px 60px;
+}
+main div.grid-container div:nth-of-type(4) {
+  grid-column: 3/4;
+  grid-row: 3/7;
+}
+main div.grid-container div:nth-of-type(5) {
+  grid-column: 4/5;
+  grid-row: 3/7;
+}
+main div.grid-container div:nth-of-type(6) {
+  grid-column: 5/7;
+  grid-row: 1/4;
+}
+main div.grid-container div:nth-of-type(7) {
+  grid-column: 5/7;
+  grid-row: 4/7;
+}
+main div.grid-container div:nth-of-type(8) {
+  grid-column: 7/8;
+  grid-row: 1/4;
+}/*# sourceMappingURL=style.css.map */
