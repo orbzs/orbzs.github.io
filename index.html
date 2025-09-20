@@ -144,7 +144,14 @@
           <h2 data-scroll class="q">
             Q6. 關於這份申請網頁，分享一個開發時的技術心得。
           </h2>
-          <p data-scroll class="a"></p>
+          <p data-scroll class="a">
+            在製作的當初，我想要做出在整頁的header下滑後，讓問題與回答部分以橫向滾動的方式出現，並套用滑順的滾動效果。
+            一開始搜尋到的是scroll-behavior，但是發現不符合需求，因此改用英文搜尋。後來找到的<a
+              href="https://codepen.io/cameronknight/pen/qBNvrRQ"
+              >參考</a
+            >使用了GSAP。儘管使用了ChatGPT協助說明，考慮到自己對於js完全不熟悉，應用到自己的網頁上需要的學習時間可能會太長，因此決定只使用Locomotive來達成效果。過程中遇到許多問題，例如CSS被Locomotive的CSS覆蓋掉導致跑版、container的層級錯誤導致無法捲動、拼字錯誤導致語法失效……等等。
+            製作完成之後，我最大的反省是如果要在本機編輯的話，應該留下紀錄避免忘記自己做了哪些更動，並且在對所參考的語法有一定了解的狀態下再去應用或是讓ChatGPT修改，減少試錯的次數。
+          </p>
         </div>
         <div class="grid-item" data-scroll-section>
           <h2 data-scroll class="q">
