@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week1 Assignment</title>
+    <link rel="stylesheet" href="./style1.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="brand">My Website</div>
+        <img
+          src="./8666802_menu_navigation_icon.png"
+          alt="menu"
+          class="menu-icon"
+          id="menuBtn"
+        />
+        <ul class="nav-list">
+          <li class="close-btn" id="closeBtn">X</li>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </nav>
+
+      <div class="welcome"><p>Welcome to MyHome</p></div>
+    </header>
+    <main>
+      <div class="promotion-block">
+        <div class="promotion">
+          <div class="imginbar"></div>
+          <p>Promotion1</p>
+        </div>
+        <div class="promotion">
+          <div class="imginbar"></div>
+          <p>Promotion2</p>
+        </div>
+        <div class="promotion">
+          <div class="imginbar"></div>
+          <p>Promotion3</p>
+        </div>
+      </div>
+      <div class="title-block">
+        <div class="title"><p>Title 1</p></div>
+        <div class="title"><p>Title 2</p></div>
+        <div class="title"><p>Title 3</p></div>
+        <div class="title"><p>Title 4</p></div>
+        <div class="title"><p>Title 5</p></div>
+        <div class="title"><p>Title 6</p></div>
+        <div class="title"><p>Title 7</p></div>
+        <div class="title"><p>Title 8</p></div>
+        <div class="title"><p>Title 9</p></div>
+        <div class="title"><p>Title 10</p></div>
+      </div>
+    </main>
+
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("closeBtn");
+      const nav = document.getElementById("navbar");
+
+      menuBtn.addEventListener("click", () => {
+        nav.classList.add("open");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>
