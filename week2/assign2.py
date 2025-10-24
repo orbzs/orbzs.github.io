@@ -66,7 +66,15 @@ def func2(ss, start, end, criteria):
                 isMatch = s[field] <= numValue
 
         if isMatch:
-            candidates.append(s)
+            if s["name"] not in bookings:
+                bookings[s["name"]] = []
+            available = True
+            for p in bookings[s["name"]]:
+                if not (end <= p["start"] or start >= p["end"]):
+                    available = False
+                    break
+            if available:
+                candidates.append(s)
 
     #
     bestService = None
@@ -91,22 +99,10 @@ def func2(ss, start, end, criteria):
 
     #
     if bestService:
-        if bestService["name"] not in bookings:
-            bookings[bestService["name"]] = []
-
-        periods = bookings[bestService["name"]]
-        available = True
-        for p in periods:
-            if not (end <= p["start"] or start >= p["end"]):
-                available = False
-                break
-
-        if available:
-            bookings[bestService["name"]].append({"start": start, "end": end})
-            print(bestService["name"])
-            return
-
-    print("Sorry")
+        bookings[bestService["name"]].append({"start": start, "end": end})
+        print(bestService["name"])
+    else:
+        print("Sorry")
 
 services = [
     {"name": "S1", "r": 4.5, "c": 1000},
@@ -121,7 +117,7 @@ func2(services, 15, 18, "r>=4.5")   # S1
 func2(services, 16, 18, "r>=4")     # Sorry
 func2(services, 13, 17, "name=S1")  # Sorry
 func2(services, 8, 9, "c<=1500")    # S2
-
+func2(services, 8, 9, "c<=1500")    # S1
 
 # Task 3
 def func3(index):
