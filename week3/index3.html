@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week3 Assignment</title>
+    <link rel="stylesheet" href="./style3.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" id="navbar">
+        <div class="brand">My Website</div>
+        <img
+          src="./8666802_menu_navigation_icon.png"
+          alt="menu"
+          class="menu-icon"
+          id="menuBtn"
+        />
+        <ul class="nav-list">
+          <li class="close-btn" id="closeBtn">X</li>
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+          <li>Item 4</li>
+        </ul>
+      </nav>
+
+      <div class="welcome"><p>Welcome to MyHome</p></div>
+    </header>
+    <main>
+      <div class="promotion-block">
+        <div class="promotion" id="promotion1">
+          <div class="imginbar"></div>
+          <!-- <p>Promotion1</p> -->
+        </div>
+        <div class="promotion" id="promotion2">
+          <div class="imginbar"></div>
+          <!-- <p>Promotion2</p> -->
+        </div>
+        <div class="promotion" id="promotion3">
+          <div class="imginbar"></div>
+          <!-- <p>Promotion3</p> -->
+        </div>
+      </div>
+      <div class="title-block">
+        <!-- <div class="title" id="title1"></div>
+        <div class="title" id="title2"></div>
+        <div class="title" id="title3"></div>
+        <div class="title" id="title4"></div>
+        <div class="title" id="title5"></div>
+        <div class="title" id="title6"></div>
+        <div class="title" id="title7"></div>
+        <div class="title" id="title8"></div>
+        <div class="title" id="title9"></div>
+        <div class="title" id="title10"></div> -->
+      </div>
+    </main>
+    <div class="load">
+      <button onclick="loadTitles(currentTitles, currentTitles + 10);">
+        Load More
+      </button>
+    </div>
+
+    <script>
+      //文字json
+      const url1 = "https://orbzs.github.io/week3/assignment-3-1.json";
+      //圖片json
+      const url2 = "https://orbzs.github.io/week3/assignment-3-2.json";
+      let currentTitles = 0;
+      let data1, data2;
+      Promise.all([fetch(url1), fetch(url2)])
+        .then(function (responses) {
+          return Promise.all(
+            responses.map(function (r) {
+              return r.json();
+            })
+          );
+        })
+        .then(function ([d1, d2]) {
+          console.log(d1, d2);
+          data1 = d1;
+          data2 = d2;
+          // Promotions
+          for (let i = 0; i < data1.rows.length; i++) {
+            // PromotionsText
+            let sname = document.createElement("p");
+            sname.textContent = data1.rows[i].sname;
+            let targetText = document.querySelector("#promotion" + (i + 1));
+            if (targetText) {
+              targetText.appendChild(sname);
+            }
+            // PromotionsPic
+            let serial1 = data1.rows[i].serial;
+            let matchedArrayElement = data2.rows.find(
+              (currentrowfor2) => currentrowfor2.serial === serial1
+            );
+            let targetPic = document.querySelector(
+              "#promotion" + (i + 1) + " .imginbar"
+            );
+            if (targetPic) {
+              let regex = /\/d_upload_ttn.+?\.jpg/;
+              targetPic.style.backgroundImage = `url("${
+                data2.host
+              }${matchedArrayElement.pics.match(regex)}")`;
+            }
+          }
+          // Titles
+          loadTitles(currentTitles, currentTitles + 10);
+        });
+      function loadTitles(start, end) {
+        for (let i = start; i < end && i < data1.rows.length - 3; i++) {
+          // new Nodes
+          let newDiv = document.createElement("div");
+          newDiv.className = "title";
+          newDiv.id = "title" + (i + 1);
+          document.querySelector(".title-block").appendChild(newDiv);
+
+          // TitlesText
+          let sname = document.createElement("p");
+          sname.textContent = data1.rows[i + 3].sname;
+          newDiv.appendChild(sname);
+
+          //TitlesPic
+          let serial1 = data1.rows[i + 3].serial;
+          let matchedArrayElement = data2.rows.find(
+            (currentrowfor2) => currentrowfor2.serial === serial1
+          );
+
+          if (matchedArrayElement) {
+            let regex = /\/d_upload_ttn.+?\.jpg/;
+            newDiv.style.backgroundImage = `url("${
+              data2.host
+            }${matchedArrayElement.pics.match(regex)}")`;
+          }
+        }
+        currentTitles = end;
+        if (currentTitles >= data1.rows.length - 3) {
+          document.querySelector(".load button").style.display = "none";
+        }
+      }
+    </script>
+
+    <script>
+      const menuBtn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("closeBtn");
+      const nav = document.getElementById("navbar");
+
+      menuBtn.addEventListener("click", () => {
+        nav.classList.add("open");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        nav.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>
