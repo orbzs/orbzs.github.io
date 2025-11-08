@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block header
+%}歡迎光臨，請輸入信箱密碼{% endblock %} {% block head %}
+<script src="/static/script.js" defer></script>
+{% endblock %} {% block content %}
+<div style="font-weight: bold">登入系統</div>
+<form id="loginForm" action="/login" method="post">
+  <div><label>信箱</label>
+  <input type="text" name="email"/></div>
+  <div><label>密碼</label>
+  <input type="password" name="password" /></div>
+  <div><label>同意條款</label><input type="checkbox" id="agree" /> </div>
+  <div><button type="submit">登入</button></div>
+</form>
+<hr>
+  <div style="font-weight: bold">取得旅館資訊</div>
+  <form id="hotelForm">
+  <div><label>編號</label>
+  <input type="text" id="hotelId"></div>
+  <div><button type="submit">取得</button></div>
+</form>
+</body>
+{% endblock %}

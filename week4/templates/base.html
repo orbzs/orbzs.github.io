@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+        text-align: center;
+        font-size: 1.1rem;
+      }
+
+      header {
+        background-color: #223344;
+        color: white;
+        width: 100%;
+        text-align: center;
+        font-size: 0.8rem;
+      }
+
+      div,
+      a {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      form label {
+        width: 80px; /* 固定寬度，input 對齊 */
+        text-align: center;
+      }
+
+      hr {
+        width: 100%; /* 線寬 */
+        margin: 20px auto;
+      }
+
+      button {
+        padding: 5px 10px;
+      }
+    </style>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <h1>{% block header %}{% endblock %}</h1>
+    </header>
+
+    {% block content %}{% endblock %}
+  </body>
+</html>

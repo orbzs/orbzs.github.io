@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Hotel info{% endblock %} {% block header
+%}旅館的資訊{% endblock %} 
+{% block content %}
+    {% if hotel %}
+    <p>{{ hotel.ch_name }}、{{ hotel.en_name }}、{{ hotel.tel }}</p>
+    {% else %}
+    <div>查詢不到相關資料</div>
+    {% endif %}
+    <a href="/">返回首頁</a>
+  </body>
+  {% endblock %}
+
