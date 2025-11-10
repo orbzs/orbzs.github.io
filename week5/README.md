@@ -122,14 +122,14 @@ mysql> insert into message(member_id, content, like_count)
 mysql> insert into message(member_id, content, like_count)
     -> values(5, 'twhsnwne', 11);
 ```
-<img width="844" height="552" alt="image" src="https://github.com/user-attachments/assets/fd0072fb-807c-4237-9ef8-8d1e98dc70e0" />
+  > <img width="844" height="552" alt="image" src="https://github.com/user-attachments/assets/fd0072fb-807c-4237-9ef8-8d1e98dc70e0" />
 
 - SELECT all messages, including sender names. We have to JOIN the member table to get that.
 ```sql
 mysql> select message.*, member.name from message
 -> inner join member on message.member_id=member.id;
 ```
-<img width="844" height="234" alt="image" src="https://github.com/user-attachments/assets/f3f43d74-8cc1-4019-ae28-0c6125c019fb" />
+  > <img width="844" height="234" alt="image" src="https://github.com/user-attachments/assets/f3f43d74-8cc1-4019-ae28-0c6125c019fb" />
 
 -SELECT all messages, including sender names, where sender email equals to test@test.com. We have to JOIN the member table to filter and get that.
 ```sql
@@ -138,7 +138,7 @@ mysql> select message.*, member.name
     -> inner join member on message.member_id=member.id
     -> where member.email='test@test.com';
 ```
-<img width="844" height="202" alt="image" src="https://github.com/user-attachments/assets/843d625c-da87-485e-8dad-5305553738c7" />
+  > <img width="844" height="202" alt="image" src="https://github.com/user-attachments/assets/843d625c-da87-485e-8dad-5305553738c7" />
 
 - Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender email equals to test@test.com.
 ```sql
@@ -147,7 +147,7 @@ mysql> select avg(message.like_count)
     -> inner join member on message.member_id = member.id
     -> where member.email = 'test@test.com';
 ```
-<img width="844" height="214" alt="image" src="https://github.com/user-attachments/assets/fe638e6a-0bb5-4bd6-acc4-84038d7dbed5" />
+  > <img width="844" height="214" alt="image" src="https://github.com/user-attachments/assets/fe638e6a-0bb5-4bd6-acc4-84038d7dbed5" />
 
 - Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender email.
 ```sql
@@ -156,7 +156,7 @@ mysql> select avg(message.like_count), member.email
     -> join member on message.member_id=member.id
     -> group by email;
 ```
-<img width="844" height="284" alt="image" src="https://github.com/user-attachments/assets/4d60ebf1-1ed7-421a-87fd-cd91c9bcd434" />
+  > <img width="844" height="284" alt="image" src="https://github.com/user-attachments/assets/4d60ebf1-1ed7-421a-87fd-cd91c9bcd434" />
 
 
 
