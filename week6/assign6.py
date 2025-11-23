@@ -90,7 +90,7 @@ async def member_page(request: Request):
 @app.get("/logout")
 async def logout(request: Request):
     request.session.clear()
-    return {"ok":True}
+    return RedirectResponse(url="/", status_code=303)
 
 @app.post("/createMessage")
 async def creatMessage(request: Request, content: Annotated[str, Form(...)]):
@@ -123,3 +123,4 @@ async def deleteMessage(request: Request, message_id: Annotated[int, Form(...)])
 @app.get("/ohoh", response_class=HTMLResponse)
 async def ohoh(request: Request, msg: str = "錯誤訊息"):
     return templates.TemplateResponse("ohoh.html", {"request": request, "msg": msg})
+
