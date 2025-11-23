@@ -17,8 +17,8 @@ app.add_middleware(SessionMiddleware, secret_key="w6login")
 import mysql.connector
 con = mysql.connector.connect(
   host="localhost",
-  user="root",
-  password="mysql",
+  user="myusername",
+  password="mypassword",
   database="website"
 )
 print("database ready")
@@ -123,4 +123,5 @@ async def deleteMessage(request: Request, message_id: Annotated[int, Form(...)])
 @app.get("/ohoh", response_class=HTMLResponse)
 async def ohoh(request: Request, msg: str = "錯誤訊息"):
     return templates.TemplateResponse("ohoh.html", {"request": request, "msg": msg})
+
 
