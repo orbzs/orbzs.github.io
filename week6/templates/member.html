@@ -13,68 +13,27 @@
 
 <hr />
 
-<div id="messageDiv" style="flex-direction: column"></div>
-
-<script>
-  async function checkStatus() {
-    let response = await fetch("/login", { method: "GET" });
-    let result = await response.json();
-    if (result.ok) {
-    } else {
-      window.location = "/";
-    }
-  }
-  checkStatus();
-</script>
+<div style="flex-direction: column">
+  {% for msg in messages %}
+  <div>
+    <span>{{ msg.name }}:{{ msg.content }}</span>
+    {% if member and msg.member_id == member["id"] %}
+    <form action="/deleteMessage" method="post" style="display: inline">
+      <input type="hidden" name="message_id" value="{{ msg.message_id }}" />
+      <button type="submit" onclick="return confirm('確定刪除留言？')">
+        x
+      </button>
+    </form>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
 
 <script>
   async function logout() {
-    let response = await fetch("/logout");
+    let response = await fetch("/logout", { credentials: "include" });
     let result = await response.json();
     if (result.ok) window.location = "/";
-  }
-</script>
-
-<script>
-  async function getMessages() {
-    // 先確認登入者
-    let loginRes = await fetch("/login");
-    let loginData = await loginRes.json();
-    let myId = loginData.ok ? loginData.id : null;
-
-    // 再取得留言
-    let response = await fetch("/createMessage");
-    let result = await response.json();
-
-    let messageDiv = document.querySelector("#messageDiv");
-    messageDiv.innerHTML = "";
-
-    for (let i = 0; i < result.length; i++) {
-      let message = document.createElement("div");
-      message.textContent = result[i].name + ":" + result[i].content;
-
-      // 只有自己的留言才顯示刪除按鈕
-      if (result[i].member_id === myId) {
-        let deleteButton = document.createElement("button");
-        deleteButton.textContent = "x";
-        deleteButton.onclick = () => deleteMessage(result[i].id);
-        message.appendChild(deleteButton);
-      }
-
-      messageDiv.appendChild(message);
-    }
-  }
-
-  getMessages();
-</script>
-
-<script>
-  async function deleteMessage(id) {
-    let response = await fetch("/deleteMessage/" + id, { method: "POST" });
-    let result = await response.json();
-    if (result.ok) {
-      getMessages();
-    }
   }
 </script>
 {% endblock %}
