@@ -10,7 +10,6 @@ from typing import Annotated
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 app.add_middleware(SessionMiddleware, secret_key="w6login")
@@ -18,8 +17,8 @@ app.add_middleware(SessionMiddleware, secret_key="w6login")
 import mysql.connector
 con = mysql.connector.connect(
   host="localhost",
-  user="yourusername",
-  password="yourpassword",
+  user="root",
+  password="mysql",
   database="website"
 )
 print("database ready")
@@ -42,36 +41,51 @@ async def signup(request: Request, name: Annotated[str, Form(...)], email: Annot
     else:
         return RedirectResponse(url="/ohoh?msg=重複的電子郵件", status_code=303)
 
+# login
 @app.post("/login")
 async def signin(request: Request, email: Annotated[str, Form(...)], password: Annotated[str, Form(...)]):
-    cursor=con.cursor()
+    if not email or not password:
+        return RedirectResponse(url="/ohoh?msg=電子郵件或密碼錯誤", status_code=303)
+    cursor = con.cursor(dictionary=True) 
     cursor.execute("SELECT * FROM member WHERE email=%s and password=%s", [email, password])
     result=cursor.fetchone()
     if result==None:
         request.session["member"]=None
         return RedirectResponse(url="/ohoh?msg=電子郵件或密碼錯誤", status_code=303)
-    else:
-        request.session["member"]={
-            "id": result[0],"name":result[1],"email":result[2]
-        }
-        return RedirectResponse(url="/member", status_code=303)
+    request.session["member"] = {
+        "id": result["id"],
+        "name": result["name"],
+        "email": result["email"]
+    }
+    return RedirectResponse(url="/member", status_code=303)
 
-    
-@app.get("/login")
-async def statuscheck(request: Request):
-    if "member" in request.session and request.session["member"]:
-        member=request.session["member"]
-        return {"ok": True, "id": member["id"], "name": member["name"], "email": member["email"]}
-    else:
-        return {"ok":False}
-
+# /member get messages
 @app.get("/member", response_class=HTMLResponse) 
 async def member_page(request: Request): 
-    member = request.session.get("member") 
+    member = request.session.get("member")
     if not member: 
         return RedirectResponse(url="/", status_code=303) 
-    return templates.TemplateResponse("member.html", {"request": request, "member": member}) 
-
+    cursor=con.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT 
+            message.id AS message_id, 
+            message.content, 
+            message.member_id,
+            member.name
+        FROM message
+        JOIN member ON message.member_id = member.id
+        ORDER BY message.id DESC
+    """)
+    messages=cursor.fetchall()
+    cursor.close()
+    return templates.TemplateResponse(
+      "member.html",
+     {
+          "request": request,
+          "member": member,
+          "messages": messages,
+       }
+    )
 
 @app.get("/logout")
 async def logout(request: Request):
@@ -80,56 +94,30 @@ async def logout(request: Request):
 
 @app.post("/createMessage")
 async def creatMessage(request: Request, content: Annotated[str, Form(...)]):
-    cursor=con.cursor()
     member = request.session.get("member")
     member_id = member.get("id")
+    cursor=con.cursor()
     cursor.execute(
         "INSERT INTO message (member_id, content) VALUES (%s, %s)",
-        (member_id, content),
+        (member_id, content)
     )
     con.commit()
     cursor.close()
     return RedirectResponse(url="/member", status_code=303)
-
-@app.get("/createMessage")
-async def getMessage():
-    cursor=con.cursor(dictionary=True)
-    cursor.execute("""
-        SELECT 
-            message.id, 
-            message.content, 
-            message.member_id,
-            member.name
-        FROM message
-        JOIN member ON message.member_id = member.id
-    """)
-    
-    data=cursor.fetchall()
-    cursor.close()
-    return data
-
-@app.post("/deleteMessage/{message_id}")
-async def delete_message(request: Request, message_id: int):
+  
+@app.post("/deleteMessage")
+async def deleteMessage(request: Request, message_id: Annotated[int, Form(...)]):
     member = request.session.get("member")
     if not member:
-        return {"ok": False, "error": "not logged in"}
-
+        return RedirectResponse(url="/", status_code=303)
     cursor = con.cursor()
-    cursor.execute("SELECT member_id FROM message WHERE id=%s", (message_id,))
-    row = cursor.fetchone()
-    if not row:
-        cursor.close()
-        return {"ok": False, "error": "no such message"}
-
-    owner_id = row[0]
-    if owner_id != member.get("id"):
-        cursor.close()
-        return {"ok": False, "error": "not owner"}
-
-    cursor.execute("DELETE FROM message WHERE id=%s", (message_id,))
+    cursor.execute(
+        "DELETE FROM message WHERE id=%s AND member_id=%s",
+        (message_id, member["id"])
+    )
     con.commit()
     cursor.close()
-    return {"ok": True}
+    return RedirectResponse(url="/member", status_code=303)
 
 
 @app.get("/ohoh", response_class=HTMLResponse)
