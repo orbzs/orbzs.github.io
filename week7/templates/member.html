@@ -1,0 +1,128 @@
+{% extends "base.html" %} {% block title %}Member{% endblock %} {% block header
+%}歡迎光臨，這是會員頁{% endblock %} {% block content %}
+<div>{{ member["name"] }}，歡迎登入系統</div>
+<button onclick="logout();">登出系統</button>
+
+<hr />
+
+<div id="searchName" style="flex-direction: column">
+  <div style="font-weight: bold">查詢會員姓名</div>
+  <div>
+    <input type="text" name="searchInput" required /><button
+      type="submit"
+      onclick="searchName();"
+    >
+      查詢
+    </button>
+  </div>
+</div>
+
+<div id="newName" style="flex-direction: column">
+  <div style="font-weight: bold">更新我的姓名</div>
+  <div>
+    <input type="text" name="newNameInput" required />
+    <button type="submit" onclick="newName();">更新</button>
+  </div>
+</div>
+
+<div id="searchHistory" style="flex-direction: column">
+  <div style="font-weight: bold">誰查詢了我</div>
+  <button type="submit" onclick="history();">更新</button>
+</div>
+
+<!-- Task 2: Call Member Query API by fetch function in the front-end -->
+<script>
+  async function logout() {
+    let response = await fetch("/logout", { credentials: "include" });
+    let result = await response.json();
+    if (result.ok) window.location = "/";
+  }
+</script>
+
+<script>
+  async function searchName() {
+    let id = document.querySelector('input[name="searchInput"]').value;
+    let response = await fetch("/api/member/" + id, {
+      method: "GET",
+      credentials: "include",
+    });
+    let result = await response.json();
+
+    let currentDiv = document.getElementById("searchName");
+    let oldResult = document.getElementById("searchResult");
+    if (oldResult) oldResult.remove();
+
+    let searchResult = document.createElement("div");
+    searchResult.id = "searchResult";
+    if (result.data) {
+      searchResult.textContent =
+        result.data.name + " (" + result.data.email + ")";
+    } else {
+      searchResult.textContent = "查無此會員";
+    }
+    currentDiv.appendChild(searchResult);
+  }
+</script>
+
+<!-- Task 3: Add feature for updating name -->
+<script>
+  async function newName() {
+    let newName = document.querySelector('input[name="newNameInput"]').value;
+
+    let response = await fetch("/api/member", {
+      method: "PATCH",
+      body: JSON.stringify({
+        name: newName,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      credentials: "include",
+    });
+
+    let result = await response.json();
+
+    let currentDiv = document.getElementById("newName");
+    let oldResult = document.getElementById("newNameResult");
+    if (oldResult) oldResult.remove();
+
+    let newNameResult = document.createElement("div");
+    newNameResult.id = "newNameResult";
+    if (result.ok) {
+      newNameResult.textContent = "更新成功";
+    } else {
+      newNameResult.textContent = "更新失敗";
+    }
+    currentDiv.appendChild(newNameResult);
+  }
+</script>
+
+<!-- Task 4: Add feature for tracking member queries -->
+<script>
+  async function history() {
+    let response = await fetch("/api/history", {
+      method: "GET",
+      credentials: "include",
+    });
+    let result = await response.json();
+    let searchHistory = document.querySelector("#searchHistory");
+    let oldResult = document.querySelector("#historyResults");
+    if (oldResult) oldResult.remove();
+
+    let histories = document.createElement("div");
+    histories.id = "historyResults";
+    histories.style = "flex-direction: column";
+
+    for (let i = 0; i < result.histories.length; i++) {
+      let history = document.createElement("div");
+      history.textContent =
+        result.histories[i].name +
+        " (" +
+        result.histories[i].time.replace("T", " ") +
+        ")";
+      histories.appendChild(history);
+    }
+    searchHistory.appendChild(histories);
+  }
+</script>
+{% endblock %}
